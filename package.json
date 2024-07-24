@@ -1,0 +1,10 @@
+{
+  "name": "eiga-client",
+  "version": "1.0.0",
+  "description": "eiga-client is a modern single-page application designed for anime enthusiasts. Built using React, this client-side interface complements the existing server-side code and REST API, creating a seamless user experience for accessing anime information and managing personal anime lists.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "@mstheawin",
+  "license": "ISC"
+}
