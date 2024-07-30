@@ -1,16 +1,15 @@
 //Import the `createRoot` function from 'react-dom/client'
 import { createRoot } from "react-dom/client";
 
+//importing the MainView component
+import { MainView } from "./components/main-view/main-view";
+
 //imported for styling; it will be bundled by build tool
 import "./index.scss";
 
 // Main component (will eventually use all the others)
 const MyFlixApplication = () => {
-    return (
-        <div className="my-flix">
-            <div>Good morning</div>
-        </div>
-    );
+    return <MainView />;
 };
 
 // Locate the root DOM element where the React app will be mounted
