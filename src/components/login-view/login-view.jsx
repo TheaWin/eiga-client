@@ -1,4 +1,7 @@
 import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+
 //LoginView function component
 export const LoginView = ({ onLoggedIn }) => {
   const [username, setUsername] = useState("");
@@ -46,35 +49,35 @@ export const LoginView = ({ onLoggedIn }) => {
   };
   
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        Username:
-        <input 
-          type="text" 
-          value = {username}
+    <Form onSubmit={handleSubmit}>
+      <Form.Group controlId="formUsername">
+        <Form.Label>Username:</Form.Label>
+        <Form.Control 
+          type="text"
+          value={username}
           onChange={(e) => setUsername(e.target.value)}
-          //form validation
           required
-          minLength="5"
+          minLength="3"
           pattern="[a-zA-Z0-9]+"
           onInvalid={(e) =>
             e.target.setCustomValidity(
-              "Username must have at least 5 characters and be alphanumeric."
-            )
-          }
+              "Username must have at least 3 characters and be alphanumeric."
+            )}
         />
-      </label>
-      <label>
-        Password:
-        <input 
+      </Form.Group>
+
+      <Form.Group controlId="formPassword">
+        <Form.Label>Password:</Form.Label>
+        <Form.Control
           type="password" 
           value = {password}
           onChange={(e) => setPassword(e.target.value)}
-          //form validation
           required
-         />
-      </label>
-      <button type="submit">Submit</button>
-    </form>
+        />
+      </Form.Group>
+      <Button variant="primary" type="submit">
+        Submit
+      </Button>
+    </Form>
     )
   }
