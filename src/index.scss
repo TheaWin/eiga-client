@@ -9,6 +9,8 @@ $secondary-text-color: #757575;
 $link-color: #6200EA;
 $accent-color: #FF4081;
 
+@import '~bootstrap/scss/bootstrap.scss';
+
 body {
   background-color: $background-color;
   color: $primary-text-color;

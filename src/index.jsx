@@ -3,13 +3,18 @@ import { createRoot } from "react-dom/client";
 
 //importing the MainView component
 import { MainView } from "./components/main-view/main-view";
+import Container from 'react-bootstrap/Container';
 
 //imported for styling; it will be bundled by build tool
 import "./index.scss";
 
 // Main component (will eventually use all the others)
 const MyFlixApplication = () => {
-    return <MainView />;
+    return (
+        <Container>
+            <MainView />
+        </Container>
+    );
 };
 
 // Locate the root DOM element where the React app will be mounted
