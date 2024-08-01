@@ -1,5 +1,63 @@
-$color: steelblue;
+$primary-color: #6200EA;
+$primary-variant: #3700B3;
+$secondary-color: #03DAC6;
+$secondary-variant: #018786;
+$background-color: #FFFFFF;
+$surface-color: #F5F5F5;
+$primary-text-color: #000000;
+$secondary-text-color: #757575;
+$link-color: #6200EA;
+$accent-color: #FF4081;
 
-.my-flix {
-    color: $color;
+body {
+  background-color: $background-color;
+  color: $primary-text-color;
+  font-family: Arial, sans-serif;
+}
+  
+header {
+  background-color: $primary-color;
+  color: $background-color;
+  padding: 1rem;
+  
+  nav {
+    a {
+      color: $background-color;
+      text-decoration: none;
+      margin: 0 1rem;
+    
+    &:hover {
+      color: $secondary-color;
+      }
+    }
+  }
+}
+  
+.card {
+  background-color: $surface-color;
+  border: 1px solid $secondary-variant;
+  padding: 1rem;
+  margin: 1rem 0;
+  border-radius: 8px;
+}
+  
+button {
+  background-color: $accent-color;
+  color: $background-color;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  
+&:hover {
+  background-color: $primary-variant;
+  }
+}
+  
+a {
+  color: $link-color;
+  
+&:hover {
+  color: $secondary-color;
+  }
 }
