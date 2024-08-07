@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Button, Card, CardGroup, Col, Container, Form, Row } from "react-bootstrap";
-import { redirect } from "react-router-dom";
-import { MovieCard } from "../movie-card/movie-card";
+
+import "./profile-view.scss";
 
 export const ProfileView = ({user, token, movies, setUser}) => {
 
@@ -94,11 +94,12 @@ export const ProfileView = ({user, token, movies, setUser}) => {
   };
   
   return (
-    <Row className="justify-content-md-center">
-      <Col md={8}>
-        <Card>
+    <Container>
+    <Row className="justify-content-md-left">
+      <Col md={12}>
+        <Card className="profile-custom">
+          <Card.Header as="h5" className="profile-header-custom">Profile</Card.Header>
           <Card.Body>
-            <Card.Title>Profile</Card.Title>
             {!edit ? (
               <>
                 <p>Username: {username}</p>
@@ -146,5 +147,39 @@ export const ProfileView = ({user, token, movies, setUser}) => {
         </Card>
       </Col>
     </Row>
+    <Row>
+      <Col>
+      <Card className="profile-custom">
+      <Card.Header as="h5" className="profile-header-custom">Favorite Movies</Card.Header>
+      <ul className="list-unstyled">
+              {user.favoriteMovies && user.favoriteMovies.length > 0 ? (
+                user.favoriteMovies.map((movieId) => {
+                  const movie = movies.find((m) => m._id === movieId);
+                  return (
+                    movie && (
+                      <li key={movie._id} className="mb-3">
+                        <Card className="d-flex flex-row">
+                          <Card.Img
+                            variant="top"
+                            src={movie.imageURL}
+                            style={{ width: '100px', height: 'auto' }}
+                          />
+                          <Card.Body>
+                            <Card.Title>{movie.Name}</Card.Title>
+                            <Card.Text>{movie.Description}</Card.Text>
+                          </Card.Body>
+                        </Card>
+                      </li>
+                    )
+                  );
+                })
+              ) : (
+                <p>No favorite movies found.</p>
+              )}
+            </ul>
+      </Card>
+      </Col>          
+    </Row>
+    </Container>
   )
 }
