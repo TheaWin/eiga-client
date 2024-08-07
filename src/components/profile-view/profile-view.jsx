@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Button, Card, CardGroup, Col, Container, Form, Row } from "react-bootstrap";
 
 import "./profile-view.scss";
+import { MovieCard } from "../movie-card/movie-card";
 
-export const ProfileView = ({user, token, movies, setUser}) => {
+export const ProfileView = ({user, token, movies, setUser, updateUserFavorites}) => {
 
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
@@ -92,6 +93,9 @@ export const ProfileView = ({user, token, movies, setUser}) => {
         alert("Something went wrong");
       });
   };
+
+  
+
   
   return (
     <Container>
@@ -151,32 +155,27 @@ export const ProfileView = ({user, token, movies, setUser}) => {
       <Col>
       <Card className="profile-custom">
       <Card.Header as="h5" className="profile-header-custom">Favorite Movies</Card.Header>
-      <ul className="list-unstyled">
+      <Container>
               {user.favoriteMovies && user.favoriteMovies.length > 0 ? (
                 user.favoriteMovies.map((movieId) => {
                   const movie = movies.find((m) => m._id === movieId);
                   return (
-                    movie && (
-                      <li key={movie._id} className="mb-3">
-                        <Card className="d-flex flex-row">
-                          <Card.Img
-                            variant="top"
-                            src={movie.imageURL}
-                            style={{ width: '100px', height: 'auto' }}
-                          />
-                          <Card.Body>
-                            <Card.Title>{movie.Name}</Card.Title>
-                            <Card.Text>{movie.Description}</Card.Text>
-                          </Card.Body>
-                        </Card>
-                      </li>
-                    )
-                  );
+                    <Col
+                      key={movieId}>
+                        <MovieCard
+                         movie={movie}
+                         token={token}
+                         setUser={setUser}
+                         user={user}
+                         updateUserFavorites={updateUserFavorites}
+                      />
+                    </Col>                      
+                  ) ; null ;
                 })
               ) : (
                 <p>No favorite movies found.</p>
               )}
-            </ul>
+            </Container>
       </Card>
       </Col>          
     </Row>

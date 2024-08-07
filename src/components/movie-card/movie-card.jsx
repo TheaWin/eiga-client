@@ -5,6 +5,11 @@ import { Link } from "react-router-dom";
 import "./movie-card.scss";
 
 export const MovieCard = ({ movie, user, token, updateUserFavorites }) => {
+
+  if(!movie) {
+    return null;
+  }
+
   const isFavorite = user && user.favoriteMovies ? user.favoriteMovies.includes(movie._id) : false; // Check if user and favoriteMovies exist
   const [favorite, setFavorite] = useState(isFavorite);
     

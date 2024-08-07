@@ -15,8 +15,8 @@ export const MainView = () => {
     //set intial value to be an empty list
     const [movies,setMovies] = useState([]);
     const [selectedMovie, setselectedMovie] = useState(null);
-    const [user, setUser] = useState(null);
-    const [token,setToken] = useState(null);
+    const [user, setUser] = useState(storedUser);
+    const [token,setToken] = useState(storedToken);
 
     useEffect(() => {
       if(!token) {
@@ -42,6 +42,17 @@ export const MainView = () => {
             setMovies(animeFromApi);
           })
       }, [token]);
+
+      const updateUserFavorites = (movieId, isFavorite) => {
+        setUser((prevUser) => {
+          const updatedFavorites = isFavorite
+            ? [...prevUser.favoriteMovies, movieId]
+            : prevUser.favoriteMovies.filter((id) => id !== movieId);
+          
+          localStorage.setItem("user", JSON.stringify({...prevUser,favoriteMovies: updateUserFavorites}));
+          return { ...prevUser, favoriteMovies: updatedFavorites };
+        });
+      };
 
       return (
         <>
@@ -114,7 +125,7 @@ export const MainView = () => {
                               movie={movie}
                               user={storedUser}
                               token={storedToken}
-                                // updateUserFavorites={updateUserFavorites}
+                                updateUserFavorites={updateUserFavorites}
                             />
                            
                           ))}
@@ -131,6 +142,8 @@ export const MainView = () => {
                         token={storedToken}
                         movies={movies}
                         setUser={setUser}
+                        updateUserFavorites={updateUserFavorites}
+
                       />
                     }
                   />
