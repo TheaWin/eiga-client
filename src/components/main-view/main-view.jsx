@@ -55,8 +55,8 @@ export const MainView = () => {
             }}
           />
     
-          <Container>
-            <Row className="justify-content-md-center">
+          {/* <Container> */}
+            <Row className="margin-top-custom justify-content-center mb-5">
               
                 <Routes>
                   <Route
@@ -92,7 +92,7 @@ export const MainView = () => {
                       ) : movies.length === 0 ? (
                         <Col> The list is empty! </Col>
                       ) : (
-                        <Col md={8}>
+                        <Col>
                           <MovieView movies={movies} />
                         </Col>
                       )
@@ -109,9 +109,14 @@ export const MainView = () => {
                       ) : (
                         <>
                           {movies.map((movie) => (
-                            <Col className="mb-4" key={movie.id} md={3}>
-                              <MovieCard movie={movie} />
-                            </Col>
+                            <MovieCard 
+                              key={movie._id}
+                              movie={movie}
+                              user={storedUser}
+                              token={storedToken}
+                                // updateUserFavorites={updateUserFavorites}
+                            />
+                           
                           ))}
                         </>
                       )
@@ -132,7 +137,7 @@ export const MainView = () => {
                 </Routes>
               
             </Row>
-          </Container>
+          {/* </Container> */}
           </BrowserRouter>
         </>
       )
