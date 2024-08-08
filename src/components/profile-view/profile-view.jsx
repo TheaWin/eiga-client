@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Button, Card, CardGroup, Col, Container, Form, Row } from "react-bootstrap";
-
-import "./profile-view.scss";
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap";
 import { MovieCard } from "../movie-card/movie-card";
 
-export const ProfileView = ({user, token, movies, setUser, updateUserFavorites}) => {
+import "./profile-view.scss";
+
+export const ProfileView = () => {
 
   const [username, setUsername] = useState("");
   const [name, setName] = useState("");
@@ -12,6 +12,13 @@ export const ProfileView = ({user, token, movies, setUser, updateUserFavorites})
   const [email, setEmail] = useState("");
   const [birthday, setBirthday] = useState("");
   const [edit, setEdit] = useState(false);
+
+  const storedUser = JSON.parse(localStorage.getItem('user'));
+  const storedToken = localStorage.getItem('token');
+  const [user, setUser] = useState(storedUser ? storedUser : null);
+  const [token, setToken] = useState(storedToken ? storedToken : null);
+  const [movies, setMovies] = useState([]);
+  const [favMovies, setFavMovies] = useState([]);
   
   useEffect(() => {
     if (user) {
@@ -21,6 +28,38 @@ export const ProfileView = ({user, token, movies, setUser, updateUserFavorites})
       setBirthday(user.birthday);
     }
   }, [user]);
+
+  useEffect(() => {
+    if (!user) {
+      fetch(`https://anime-eiga-84a0980bd564.herokuapp.com/users/${storedUser.username}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setUser(data);
+        })
+        .catch((error) => console.error('Error fetching user data:', error));
+    }
+
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch('https://anime-eiga-84a0980bd564.herokuapp.com/anime', {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        const movies = await response.json();
+        setMovies(movies);
+        setFavMovies(movies.filter((movie) => storedUser.favoriteMovies.includes(movie._id)));
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      }
+    };
+
+    fetchMovies();
+  }, [user, token, storedUser.username, storedUser.favoriteMovies]);
 
   const handleEdit = () => {
     setEdit(true);
@@ -94,9 +133,12 @@ export const ProfileView = ({user, token, movies, setUser, updateUserFavorites})
       });
   };
 
-  
+  const updateFavMovies = (movieId) => {
+    setFavMovies((prevFavMovies) =>
+      prevFavMovies.filter((m) => m._id !== movieId)
+    );
+  };
 
-  
   return (
     <Container>
     <Row className="justify-content-md-left">
@@ -151,31 +193,22 @@ export const ProfileView = ({user, token, movies, setUser, updateUserFavorites})
         </Card>
       </Col>
     </Row>
+
     <Row>
       <Col>
       <Card className="profile-custom">
       <Card.Header as="h5" className="profile-header-custom">Favorite Movies</Card.Header>
-      <Container>
-              {user.favoriteMovies && user.favoriteMovies.length > 0 ? (
-                user.favoriteMovies.map((movieId) => {
-                  const movie = movies.find((m) => m._id === movieId);
-                  return (
-                    <Col
-                      key={movieId}>
-                        <MovieCard
-                         movie={movie}
-                         token={token}
-                         setUser={setUser}
-                         user={user}
-                         updateUserFavorites={updateUserFavorites}
-                      />
-                    </Col>                      
-                  ) ; null ;
-                })
-              ) : (
-                <p>No favorite movies found.</p>
-              )}
-            </Container>
+      <Row>
+        {favMovies.length === 0 ? (
+          <p>No favorite movies saved yet!</p>
+        ) : (
+          favMovies.map((movie) => (
+            <Col key={movie._id} className="mb-5 col-lg-4 col-md-6 col-sm-12 card-size d-flex" >
+              <MovieCard movie={movie} updateAction={() => updateFavMovies(movie._id)} />
+            </Col>
+          ))
+        )}
+      </Row>
       </Card>
       </Col>          
     </Row>
