@@ -120,13 +120,13 @@ export const MainView = () => {
                       ) : (
                         <>
                           {movies.map((movie) => (
+                            <Col className="mb-5 col-lg-4 col-md-6 col-sm-12 card-size d-flex">
                             <MovieCard 
                               key={movie._id}
                               movie={movie}
-                              user={storedUser}
-                              token={storedToken}
-                                updateUserFavorites={updateUserFavorites}
+                              updateAction={setUser}
                             />
+                            </Col>
                            
                           ))}
                         </>

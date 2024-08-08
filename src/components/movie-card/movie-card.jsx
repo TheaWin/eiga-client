@@ -1,53 +1,92 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { Card, Button, Row, Col, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "./movie-card.scss";
 
-export const MovieCard = ({ movie, user, token, updateUserFavorites }) => {
+export const MovieCard = ({ movie, updateAction}) => {
+
+  const [favorite, setFavorite] = useState(false);
+  const movieId = movie._id;
 
   if(!movie) {
     return null;
   }
 
-  const isFavorite = user && user.favoriteMovies ? user.favoriteMovies.includes(movie._id) : false; // Check if user and favoriteMovies exist
-  const [favorite, setFavorite] = useState(isFavorite);
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    console.log(user);
+    if(user && user.favoriteMovies && user.favoriteMovies.includes(movieId)) {
+      setFavorite(true);
+    }
+  }, [movieId]);
     
-  const handleFavoriteToggle = () => {
-    const url = `https://anime-eiga-84a0980bd564.herokuapp.com/users/${user.username}/${movie._id}`;
-    const method = favorite ? "DELETE" : "POST";
+  const handleAddFavorite = async (movieId) => {
+    try {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('No token found');
 
-    fetch(url, {
-      method: method,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if(response.ok) {
-          setFavorite(!favorite);
-          updateUserFavorites(movie._id, !favorite);
-        } else {
-          alert("Something went wrong. Please try again.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("Something went wrong. Please try again.");
+      const response = await fetch(`https://anime-eiga-84a0980bd564.herokuapp.com/users/${user.username}/${movie._id}`, {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
       });
+
+      if (!response.ok) {
+        if(response.status === 401) throw new Error('Unauthorized');
+        throw new Error ('Meow...T_T I can\'t seem to add it to your favorites' );
+      }
+
+      const updateUserFavorites = await response.json();
+      localStorage.setItem('user', JSON.stringify(updateUserFavorites));
+      setFavorite(true);
+      updateAction(movieId);
+      console.log('yayyy. task done~~~')
+    } catch (error) {
+      console.log(
+        `An error occured: ${error.message}`
+      );
+    }
   };
 
+  const handleRemoveFavorite = async (movieId) => {
+    try {
+      const user = JSON.parse(localStorage.getItem('user'));
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('No token found');
+
+      const response = await fetch (`https://anime-eiga-84a0980bd564.herokuapp.com/users/${user.username}/${movie._id}`, {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        if (response.status === 401) throw new Error('Unauthorized');
+        throw new Error('Meow...T_T I can\'t seem to remove it from your favorites');
+      }
+
+      const updatedUser = await response.json();
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      setFavorite(false);
+      updateAction(movieId);
+      console.log('eliminated~~~~')
+    } catch (error) {
+      console.log (`An error occured: ${error.message}`);
+  }
+};
+
   return (
-    <Col
-      key={movie._id}
-      className="mb-5 col-xl-3 col-lg-4 col-md-6 col-sm-12 card-size d-flex"
-    >
       <Container>
       <Card className="border-0 h-100 justify-content-center card-custom">
         <Card.Img src={movie.imageURL} className="img" />
         <Card.Body className="d-flex flex-column p-2">
-          <Row className="align-items-center no-gutters">
+          <Row className="align-items-center">
             <Col xs="auto" className="flex-grow-1">
               <Link to={`/anime/${encodeURIComponent(movie._id)}`}>
                 <Button
@@ -63,7 +102,7 @@ export const MovieCard = ({ movie, user, token, updateUserFavorites }) => {
               {favorite ? (
                 <Button
                   variant="link"
-                  onClick={handleFavoriteToggle}
+                  onClick={() => handleRemoveFavorite(movie._id)}
                 >
                   <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -82,7 +121,7 @@ export const MovieCard = ({ movie, user, token, updateUserFavorites }) => {
               ) : (
                 <Button
                   variant="link"
-                  onClick={handleFavoriteToggle}
+                  onClick={ () => handleAddFavorite(movie._id)}
                 >
                   <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +140,6 @@ export const MovieCard = ({ movie, user, token, updateUserFavorites }) => {
         </Card.Body>
     </Card>
     </Container>
-    </Col>
   );
 };
 
@@ -112,11 +150,6 @@ MovieCard.propTypes = {
     Name: PropTypes.string.isRequired,
     imageURL: PropTypes.string.isRequired,
   }).isRequired,
-  user: PropTypes.shape({
-    username: PropTypes.string.isRequired,
-    favoriteMovies: PropTypes.arrayOf(PropTypes.string).isRequired,
-  }).isRequired,
-  token: PropTypes.string.isRequired,
-  // updateUserFavorites: PropTypes.func.isRequired,
+  updateAction: PropTypes.func.isRequired,
 };
 
