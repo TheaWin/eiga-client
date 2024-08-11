@@ -37,19 +37,19 @@ header {
   
 .card {
   background-color: $surface-color;
-  border: 1px solid $secondary-variant;
   padding: 1rem;
   margin: 1rem 0;
   border-radius: 8px;
 }
   
-button {
+.button-custom {
   background-color: $accent-color;
   color: $background-color;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
+  margin-top: 1rem;
   
 &:hover {
   background-color: $primary-variant;
@@ -62,4 +62,14 @@ a {
 &:hover {
   color: $secondary-color;
   }
+}
+
+.title-custom {
+  font-weight: bold;
+}
+
+.card-custom {
+  background-color: rgba($primary-color, 0.3);
+  border-radius: 20px;
+  height: 100%;
 }

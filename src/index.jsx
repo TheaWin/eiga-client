@@ -10,11 +10,11 @@ import "./index.scss";
 
 // Main component (will eventually use all the others)
 const MyFlixApplication = () => {
-    return (
-        <Container>
-            <MainView />
-        </Container>
-    );
+  return (
+    <Container>
+      <MainView />
+    </Container>
+  );
 };
 
 // Locate the root DOM element where the React app will be mounted

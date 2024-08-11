@@ -1,0 +1,27 @@
+.img-custom {
+  width: 100% !important;
+  height: 400px !important;
+  object-fit: fill !important;
+}
+
+.button-custom {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  margin-right: 0;
+}
+
+.card-custom {
+  height: 100%;
+}
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.no-gutters > .col,
+.no-gutters > [class*="col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
