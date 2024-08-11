@@ -6,8 +6,9 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        <img src={Img} height="80px" alt="logo image" className="d-inline-block aligh-top"/>
+        
         <Navbar.Brand as={Link} to="/" className="align-bottom navbar-style">
+          <img src={Img} height="80px" alt="logo image" className="d-inline-block aligh-top"/>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
