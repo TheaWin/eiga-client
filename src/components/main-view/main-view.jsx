@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
-import { MovieCard } from "../movie-card/movie-card";
-import { MovieView } from "../movie-view/movie-view";
-import { LoginView } from "../login-view/login-view";
-import { SignupView } from "../signup-view/signup-view";
-import { ProfileView } from "../profile-view/profile-view";
-import { NavigationBar } from "../navigation-bar/navigation-bar";
+import { MovieCard } from "../movie-card/movie-card.jsx";
+import { MovieView } from "../movie-view/movie-view.jsx";
+import { LoginView } from "../login-view/login-view.jsx";
+import { SignupView } from "../signup-view/signup-view.jsx";
+import { ProfileView } from "../profile-view/profile-view.jsx";
+import { NavigationBar } from "../navigation-bar/navigation-bar.jsx";
 
 export const MainView = () => {
 
@@ -104,7 +104,9 @@ export const MainView = () => {
                         <Col> The list is empty! </Col>
                       ) : (
                         <Col>
-                          <MovieView movies={movies} />
+                          <MovieView 
+                            movies={movies}
+                            key={movies._id} />
                         </Col>
                       )
                     }

@@ -1,5 +1,43 @@
-.back-button {
+$primary-color: #6200EA;
+$primary-variant: #3700B3;
+$secondary-color: #03DAC6;
+$secondary-variant: #018786;
+$background-color: #FFFFFF;
+$surface-color: #F5F5F5;
+$primary-text-color: #000000;
+$secondary-text-color: #757575;
+$link-color: #6200EA;
+$accent-color: #FF4081;
+
+.modal-body-custom {
+  margin: 0px 0px 20px;
+}
+
+.button-custom {
     padding: 4px 12px 4px 12px;
-    border: none;
+    border: 1px solid $accent-color;
     border-radius: 4px;
+    height: 42px;
   }
+
+.button-heart-custom {
+  background-color: $background-color;
+  color: $background-color;
+  border: 1px solid $accent-color;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1rem;
+  padding: 4px 12px 4px 12px;
+    
+&:hover {
+  background-color: $primary-variant;
+  }
+}
+
+.image-custom {
+  width: 300px;
+  height: 100%;
+  object-fit: fill;
+  text-align: center;
+}
