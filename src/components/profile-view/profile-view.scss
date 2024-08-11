@@ -19,3 +19,26 @@ $accent-color: #FF4081;
     background-color: $primary-color;
     color: $surface-color;
 }
+
+.buttonDelete-custom {
+  background-color: $primary-text-color;
+  color: $accent-color;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 1rem;
+  margin-left: 1rem;
+  
+&:hover {
+  background-color: $primary-variant;
+  }
+}
+  
+a {
+  color: $link-color;
+  
+&:hover {
+  color: $secondary-color;
+  }
+}

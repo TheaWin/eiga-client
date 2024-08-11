@@ -152,8 +152,8 @@ export const ProfileView = () => {
                 <p>Name: {name}</p>
                 <p>Birthday: {birthday}</p>
                 <p>Email: {email}</p>
-                <Button onClick={handleEdit}>Edit</Button>
-                <Button variant="danger" onClick={handleDelete}>
+                <Button onClick={handleEdit} className="button-custom">Edit</Button>
+                <Button variant="danger" onClick={handleDelete} className="buttonDelete-custom" >
                   Delete Account
                 </Button>
               </>
