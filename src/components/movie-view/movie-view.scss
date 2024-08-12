@@ -21,17 +21,18 @@ $accent-color: #FF4081;
   }
 
 .button-heart-custom {
-  background-color: $background-color;
-  color: $background-color;
-  border: 1px solid $accent-color;
-  padding: 0.5rem 1rem;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-top: 1rem;
-  padding: 4px 12px 4px 12px;
+  background-color: $background-color !important;
+  color: $background-color !important;
+  border: 1px solid $accent-color !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  margin-top: 1rem !important;
+  padding: 4px 12px 4px 12px !important;
     
 &:hover {
-  background-color: $primary-variant;
+  background-color: $primary-variant !important;
+  border: 1px solid $primary-variant !important; 
   }
 }
 
