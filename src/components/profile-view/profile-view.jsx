@@ -153,7 +153,7 @@ export const ProfileView = () => {
                 <p>Birthday: {birthday}</p>
                 <p>Email: {email}</p>
                 <Button onClick={handleEdit} className="button-custom">Edit</Button>
-                <Button variant="danger" onClick={handleDelete} className="buttonDelete-custom" >
+                <Button onClick={handleDelete} className="buttonDelete-custom" >
                   Delete Account
                 </Button>
               </>
@@ -183,8 +183,8 @@ export const ProfileView = () => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
                 </Form.Group>
-                <Button onClick={handleUpdate}>Save</Button>
-                <Button variant="secondary" onClick={() => setEdit(false)}>
+                <Button onClick={handleUpdate} className="button-custom">Save</Button>
+                <Button onClick={() => setEdit(false)} className="buttonCancel-custom">
                   Cancel
                 </Button>
               </Form>

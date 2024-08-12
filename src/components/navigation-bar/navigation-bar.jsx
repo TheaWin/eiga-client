@@ -1,8 +1,10 @@
-import { Navbar, Container, Nav } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Navbar, Container, Nav, Form } from "react-bootstrap";
+import { Link, useLocation } from "react-router-dom";
 import Img from "../img/logo.png";
 
-export const NavigationBar = ({ user, onLoggedOut }) => {
+export const NavigationBar = ({ user, onLoggedOut, onSearch }) => {
+  const location = useLocation();
+  
   return (
     <Navbar bg="light" expand="lg">
       <Container>
@@ -25,13 +27,26 @@ export const NavigationBar = ({ user, onLoggedOut }) => {
             )}
             {user && (
               <>
-                <Nav.Link as={Link} to="/">
-                  Home
-                </Nav.Link>
-                <Nav.Link as={Link} to={`/user`}>
-                  Profile
-                </Nav.Link>
-                <Nav.Link as={Link} to="/login" onClick={onLoggedOut}>Logout</Nav.Link>
+                {/* <Nav.Item> */}
+                  <Nav.Link as={Link} to="/">
+                    Home
+                  </Nav.Link>
+                  <Nav.Link as={Link} to={`/user`}>
+                    Profile
+                  </Nav.Link>
+                  <Nav.Link as={Link} to="/login" onClick={onLoggedOut}>Logout</Nav.Link>
+                {/* </Nav.Item> */}
+                {location.pathname !== "/user" && (
+            <Form className="d-flex">
+              <Form.Control
+                type="search"
+                placeholder="Search"
+                className="me-2"
+                aria-label="Search"
+                onChange={(e) => onSearch(e.target.value)}
+              />
+            </Form>
+          )}
               </>
             )}
           </Nav>
