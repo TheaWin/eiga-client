@@ -16,8 +16,8 @@ $accent-color: #FF4081;
   }
 
 .profile-header-custom {
-    background-color: $primary-color;
-    color: $surface-color;
+    background-color: $primary-color !important;
+    color: $surface-color !important;
 }
 
 .buttonDelete-custom {
