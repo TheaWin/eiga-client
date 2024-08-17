@@ -1,6 +1,6 @@
 # ANIMEEIGA <img src="src/components/img/logo.png" alt="AnimeEiga Logo" width="100px"/>
 
-MyFlix is a responsive web application designed for anime movie enthusiasts to explore and manage their favorite movies. The app is built using the MERN stack (MongoDB, Express, React, Node.js) and deployed on Heroku with MongoDB Atlas as the database service. Users can create profiles, browse a collection of anime movies, and save their favorites for easy access later.
+AnimeEiga is a responsive web application designed for anime movie enthusiasts to explore and manage their favorite movies. The app is built using the MERN stack (MongoDB, Express, React, Node.js) and deployed on Heroku with MongoDB Atlas as the database service. Users can create profiles, browse a collection of anime movies, and save their favorites for easy access later.
 
 ## Features
 
