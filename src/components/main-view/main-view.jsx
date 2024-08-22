@@ -17,7 +17,7 @@ export const MainView = () => {
     const [selectedMovie, setselectedMovie] = useState(null);
     const [user, setUser] = useState(storedUser);
     const [token,setToken] = useState(storedToken);
-    const [searchQuery, setSearchQuery] = useState("");
+    // const [searchQuery, setSearchQuery] = useState("");
 
     useEffect(() => {
       if(!token) {
@@ -55,13 +55,13 @@ export const MainView = () => {
         });
       };
 
-      const handleSearch = (query) => {
-        setSearchQuery(query.toLowerCase());
-      };
+      // const handleSearch = (query) => {
+      //   setSearchQuery(query.toLowerCase());
+      // };
 
-      const filteredMovies = movies.filter((movie) => 
-        movie.Name.toLowerCase().includes(searchQuery)
-      );
+      // const filteredMovies = movies.filter((movie) => 
+      //   movie.Name.toLowerCase().includes(searchQuery)
+      // );
 
       return (
         <>
@@ -73,7 +73,7 @@ export const MainView = () => {
               setToken(null);
               localStorage.clear();
             }}
-            onSearch={handleSearch}
+            // onSearch={handleSearch}
           />
     
           {/* <Container> */}
@@ -131,7 +131,17 @@ export const MainView = () => {
                         <Col>The list is empty!</Col>
                       ) : (
                         <>
-                          {filteredMovies.map((movie) => (
+                        {movies.map((movie) => (
+                            <Col className="mb-5 col-lg-4 col-md-6 col-sm-12 card-size d-flex">
+                            <MovieCard 
+                              key={movie._id}
+                              movie={movie}
+                              updateAction={setUser}
+                            />
+                            </Col>
+
+                          ))}
+                          {/* {filteredMovies.map((movie) => (
                             <Col 
                               key={movie._id}
                               className="mb-5 col-lg-4 col-md-6 col-sm-12 card-size d-flex"
@@ -142,7 +152,7 @@ export const MainView = () => {
                               />
                             </Col>
                            
-                          ))}
+                          ))} */}
                         </>
                       )
                     }

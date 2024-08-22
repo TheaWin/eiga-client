@@ -36,7 +36,7 @@ export const NavigationBar = ({ user, onLoggedOut, onSearch }) => {
                   </Nav.Link>
                   <Nav.Link as={Link} to="/login" onClick={onLoggedOut}>Logout</Nav.Link>
                 {/* </Nav.Item> */}
-                {location.pathname !== "/user" && (
+                {/* {location.pathname !== "/user" && (
             <Form className="d-flex">
               <Form.Control
                 type="search"
@@ -46,7 +46,7 @@ export const NavigationBar = ({ user, onLoggedOut, onSearch }) => {
                 onChange={(e) => onSearch(e.target.value)}
               />
             </Form>
-          )}
+          )} */}
               </>
             )}
           </Nav>
