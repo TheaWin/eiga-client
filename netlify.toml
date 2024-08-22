@@ -8,7 +8,7 @@ command = "parcel build src/index.html --public-url /"
 publish = "dist"
 
 [build.environment]
-NODE_VERSION = "16.x"
+NODE_VERSION = "16.19.0"
 
 [build.processing]
 skip_processing = true
