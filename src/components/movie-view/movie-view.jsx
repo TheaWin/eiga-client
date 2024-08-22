@@ -18,7 +18,7 @@ export const MovieView = ({ movies }) => {
       setFavorite(true);
     }
   }, [movieId]);
-    
+
   const handleAddFavorite = async (movieId) => {
     try {
       const user = JSON.parse(localStorage.getItem('user'));
@@ -102,14 +102,14 @@ export const MovieView = ({ movies }) => {
 
                 <Card.Text>{movie.Description}</Card.Text>
                 <Card.Title>Director:</Card.Title>
-                <Card.Text>{movie.Director}</Card.Text>
+                <Card.Text>{movie.Director.Name}</Card.Text>
                 <Card.Title>Genre:</Card.Title>
 
-                <Card.Text>{movie.Genre}</Card.Text>
+                <Card.Text>{movie.Genre.Name}</Card.Text>
               </Card.Body>
             </Card>
           </Col>
-          
+
         </Row>
         </Modal.Body>
 

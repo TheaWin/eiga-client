@@ -49201,7 +49201,7 @@ const MovieView = ({ movies })=>{
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
-                                                children: movie.Director
+                                                children: movie.Director.Name
                                             }, void 0, false, {
                                                 fileName: "src/components/movie-view/movie-view.jsx",
                                                 lineNumber: 105,
@@ -49215,7 +49215,7 @@ const MovieView = ({ movies })=>{
                                                 columnNumber: 17
                                             }, undefined),
                                             /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _reactBootstrap.Card).Text, {
-                                                children: movie.Genre
+                                                children: movie.Genre.Name
                                             }, void 0, false, {
                                                 fileName: "src/components/movie-view/movie-view.jsx",
                                                 lineNumber: 108,
