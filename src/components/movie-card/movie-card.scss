@@ -1,7 +1,7 @@
 .img-custom {
-  width: 100% !important;
-  height: 400px !important;
-  object-fit: fill !important;
+  width: 100%;
+  height: 400px;
+  object-fit: fill;
 }
 
 .button-custom {
@@ -13,15 +13,4 @@
 
 .card-custom {
   height: 100%;
-}
-
-.no-gutters {
-  margin-right: 0;
-  margin-left: 0;
-}
-
-.no-gutters > .col,
-.no-gutters > [class*="col-"] {
-  padding-right: 0;
-  padding-left: 0;
 }
