@@ -9,61 +9,60 @@ import { ProfileView } from "../profile-view/profile-view.jsx";
 import { NavigationBar } from "../navigation-bar/navigation-bar.jsx";
 
 export const MainView = () => {
-
   const storedUser = JSON.parse(localStorage.getItem("user"));
   const storedToken = localStorage.getItem("token");
-    //set intial value to be an empty list
-    const [movies,setMovies] = useState([]);
-    const [selectedMovie, setselectedMovie] = useState(null);
-    const [user, setUser] = useState(storedUser);
-    const [token,setToken] = useState(storedToken);
-    // const [searchQuery, setSearchQuery] = useState("");
+  // set intial value to be an empty list
+  const [movies,setMovies] = useState([]);
+  const [selectedMovie, setselectedMovie] = useState(null);
+  const [user, setUser] = useState(storedUser);
+  const [token,setToken] = useState(storedToken);
+  const [searchQuery, setSearchQuery] = useState("");
 
-    useEffect(() => {
-      if(!token) {
-        return;
-      }
+  useEffect(() => {
+    if(!token) {
+      return;
+    }
 
-        fetch("https://anime-eiga-84a0980bd564.herokuapp.com/anime", {
-          headers: {Authorization: `Bearer ${token}`}
-        })
-          .then((response) => response.json())
-          .then((data) => {
-            const animeFromApi = data.map((anime) => {
-              return {
-                _id: anime._id,
-                Name: anime.Name,
-                Description: anime.Description,
-                imageURL: anime.imageURL,
-                Genre: anime.Genre,
-                Director: anime.Director,
-                releaseYear: anime.releaseYear
-              };
-            });
-            setMovies(animeFromApi);
-          })
-      }, [token]);
-
-      const updateUserFavorites = (movieId, isFavorite) => {
-        setUser((prevUser) => {
-          const updatedFavorites = isFavorite
-            ? [...prevUser.favoriteMovies, movieId]
-            : prevUser.favoriteMovies.filter((id) => id !== movieId);
-          
-          localStorage.setItem("user", JSON.stringify({...prevUser,favoriteMovies: updateUserFavorites}));
-          return { ...prevUser, favoriteMovies: updatedFavorites };
+    fetch("https://anime-eiga-84a0980bd564.herokuapp.com/anime", {
+      headers: {Authorization: `Bearer ${token}`}
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const animeFromApi = data.map((anime) => {
+          return {
+            _id: anime._id,
+            Name: anime.Name,
+            Description: anime.Description,
+            imageURL: anime.imageURL,
+            Genre: anime.Genre,
+            Director: anime.Director,
+            releaseYear: anime.releaseYear
+          };
         });
-      };
+        setMovies(animeFromApi);
+      })
+  }, [token]);
 
-      // const handleSearch = (query) => {
-      //   setSearchQuery(query.toLowerCase());
-      // };
+  const updateUserFavorites = (movieId, isFavorite) => {
+    setUser((prevUser) => {
+      const updatedFavorites = isFavorite
+        ? [...prevUser.favoriteMovies, movieId]
+        : prevUser.favoriteMovies.filter((id) => id !== movieId);
+          
+      localStorage.setItem("user", JSON.stringify({...prevUser,favoriteMovies: updateUserFavorites}));
+      return { ...prevUser, favoriteMovies: updatedFavorites };
+    });
+  };
 
-      // const filteredMovies = movies.filter((movie) => 
-      //   movie.Name.toLowerCase().includes(searchQuery)
-      // );
+  const handleSearch = (query) => {
+    setSearchQuery(query.toLowerCase());
+  };
 
-      return (
+  const filteredMovies = movies.filter((movie) => 
+    movie.Name.toLowerCase().includes(searchQuery)
+  );
+
+  return (
         <>
         <BrowserRouter>
           <NavigationBar
@@ -73,12 +72,12 @@ export const MainView = () => {
               setToken(null);
               localStorage.clear();
             }}
-            // onSearch={handleSearch}
+            onSearch={handleSearch}
           />
-    
+
           {/* <Container> */}
             <Row className="margin-top-custom justify-content-center mb-5">
-              
+
                 <Routes>
                   <Route
                     path="/signup"
@@ -86,13 +85,13 @@ export const MainView = () => {
                       user ? <Navigate to="/" /> : <SignupView />
                     }
                   />
-    
+
                   <Route
                     path="/login"
                     element={
-                      user ? (
-                        <Navigate to="/" />
-                      ) : (
+                      user
+                        ? (<Navigate to="/" />)
+                        : (
                         <LoginView
                           onLoggedIn={(user, token) => {
                             setUser(user);
@@ -100,11 +99,10 @@ export const MainView = () => {
                             localStorage.setItem("user", JSON.stringify(user));
                             localStorage.setItem("token", token);
                           }}
-                        />
-                      )
+                        />)
                     }
                   />
-    
+
                   <Route
                     path="/anime/:movieId"
                     element={
@@ -131,7 +129,7 @@ export const MainView = () => {
                         <Col>The list is empty!</Col>
                       ) : (
                         <>
-                        {movies.map((movie) => (
+                        {/* {movies.map((movie) => (
                             <Col className="mb-5 col-lg-4 col-md-6 col-sm-12 card-size d-flex">
                             <MovieCard 
                               key={movie._id}
@@ -140,19 +138,18 @@ export const MainView = () => {
                             />
                             </Col>
 
-                          ))}
-                          {/* {filteredMovies.map((movie) => (
-                            <Col 
+                        ))} */}
+                          {filteredMovies.map((movie) => (
+                            <Col
                               key={movie._id}
                               className="mb-5 col-lg-4 col-md-6 col-sm-12 card-size d-flex"
                             >
-                              <MovieCard 
+                              <MovieCard
                                 movie={movie}
                                 updateAction={setUser}
                               />
                             </Col>
-                           
-                          ))} */}
+                          ))}
                         </>
                       )
                     }
@@ -177,5 +174,5 @@ export const MainView = () => {
           {/* </Container> */}
           </BrowserRouter>
         </>
-      )
+  )
 };

@@ -4,11 +4,11 @@ import Img from "../img/logo.png";
 
 export const NavigationBar = ({ user, onLoggedOut, onSearch }) => {
   const location = useLocation();
-  
+
   return (
     <Navbar bg="light" expand="lg">
       <Container>
-        
+
         <Navbar.Brand as={Link} to="/" className="align-bottom navbar-style">
           <img src={Img} height="80px" alt="logo image" className="d-inline-block aligh-top"/>
         </Navbar.Brand>
@@ -36,17 +36,17 @@ export const NavigationBar = ({ user, onLoggedOut, onSearch }) => {
                   </Nav.Link>
                   <Nav.Link as={Link} to="/login" onClick={onLoggedOut}>Logout</Nav.Link>
                 {/* </Nav.Item> */}
-                {/* {location.pathname !== "/user" && (
-            <Form className="d-flex">
-              <Form.Control
-                type="search"
-                placeholder="Search"
-                className="me-2"
-                aria-label="Search"
-                onChange={(e) => onSearch(e.target.value)}
-              />
-            </Form>
-          )} */}
+                {location.pathname !== "/user" && (
+                  <Form className="d-flex">
+                    <Form.Control
+                      type="search"
+                      placeholder="Search"
+                      className="me-2"
+                      aria-label="Search"
+                      onChange={(e) => onSearch(e.target.value)}
+                    />
+                  </Form>
+                )}
               </>
             )}
           </Nav>
