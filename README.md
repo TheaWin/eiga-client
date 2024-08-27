@@ -90,4 +90,4 @@ The [AnimeEiga API](https://github.com/TheaWin/anime-eiga) is used for this clie
 
 Thea Win - [mstheawin@gmail.com](mailto:mstheawin@gmail.com)
 
-Project Link: [https://github.com/your-username/myFlix-client](https://github.com/TheaWin/eiga-client)
+Project Link: [https://github.com/TheaWin/eiga-client](https://github.com/TheaWin/eiga-client)
