@@ -50,6 +50,34 @@ AnimeEiga is a responsive web application designed for anime movie enthusiasts t
 
 The app is hosted on Netlify. You can access the live version here: [AnimeEiga on Netlify](https://anime-eiga.netlify.app/)
 
+## Set Up Locally
+### Clone Repository
+Open your terminal and run the following.
+```
+git clone https://github.com/TheaWin/eiga-client.git
+```
+
+### Install Node.js, nvm, and npm
+Check if you already have Node.js, nvm, and npm installed.
+```
+node -v
+nvm -v
+npm -v
+```
+If you don't have them installed, please follow this [guidance](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-version-manager-to-install-nodejs-and-npm) to get them set up.
+
+### Install Dependencies
+1. Navigate to the cloned project in your terminal, so that you are in the root of the project.
+2. Run `npm install` in the terminal while in the root folder of the project. This will automatically install all the required dependencies.
+
+### Build Process
+To run the application locally, initiate build process with Parcel using the following command:
+```
+parcel src/index.html
+```
+## API Used
+The [AnimeEiga API](https://github.com/TheaWin/anime-eiga) is used for this client.
+
 ## Screenshots
 
 ![Home View](src/components/img/home-view.png)
